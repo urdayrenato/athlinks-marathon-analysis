@@ -1,0 +1,20 @@
+# entorno virtual
+venv/
+
+# python
+__pycache__/
+*.pyc
+
+# datos raw
+data/raw/
+
+# outputs pesados
+outputs/*.xlsx
+outputs/*.csv
+
+# vscode
+.vscode/
+
+# sistema
+.DS_Store
+Thumbs.db
