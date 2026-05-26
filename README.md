@@ -1,21 +1,32 @@
 # Athlinks Marathon Analysis
 
-Proyecto de extracción y análisis de resultados de carreras desde Athlinks utilizando Python.
-
-## Objetivo
-
-Construir un pipeline simple de ingeniería de datos para:
-
-- extraer resultados de carreras
-- procesar archivos JSON
-- transformar datos estructurados
-- generar datasets analíticos en CSV y Excel
-
-El proyecto nació como iniciativa personal para analizar resultados de running (10K, 21K y 42K), aplicando conceptos de automatización, ETL y analytics.
+Reusable Python pipeline for extracting, processing and analyzing marathon race results from Athlinks public result endpoints.
 
 ---
 
-## Tecnologías utilizadas
+## Overview
+
+This project automates the extraction and transformation of marathon race results published on Athlinks.
+
+The pipeline was designed to:
+
+- consume paginated JSON endpoints
+- download raw race result datasets
+- process and normalize structured data
+- generate analytical CSV datasets
+- support reusable extraction for multiple race distances (10K, 21K, 42K)
+
+The project combines concepts from:
+
+- lightweight data engineering
+- ETL pipelines
+- process automation
+- analytics workflows
+- API-based data extraction
+
+---
+
+## Technologies Used
 
 - Python
 - Requests
@@ -26,47 +37,50 @@ El proyecto nació como iniciativa personal para analizar resultados de running 
 
 ---
 
-## Funcionalidades
+## Main Features
 
-### 1. Descarga automatizada de resultados
+### 1. Automated JSON Extraction
 
-El script identifica y consume endpoints JSON utilizados por Athlinks para paginar resultados oficiales de carrera.
+The script consumes Athlinks public result endpoints and automatically downloads paginated race results.
 
-Características:
+Capabilities:
 
-- descarga paginada
-- extracción masiva de resultados
-- manejo de offsets
-- exportación JSON raw
-
----
-
-### 2. Transformación y limpieza de datos
-
-Procesamiento de:
-
-- rankings generales
-- categoría
-- género
-- edad
-- tiempos oficiales
-- pace por kilómetro
-
-Incluye:
-
-- eliminación de duplicados
-- normalización temporal
-- exportación CSV/XLSX
+- paginated extraction
+- bulk result download
+- offset handling
+- raw JSON export
+- reusable event configuration
 
 ---
 
-## Estructura del proyecto
+### 2. Data Processing and Transformation
+
+The processing pipeline extracts and normalizes:
+
+- overall rankings
+- gender rankings
+- age category rankings
+- athlete information
+- official finish times
+- timing metrics
+
+Includes:
+
+- duplicate removal
+- time normalization
+- CSV export
+- analytical dataset generation
+
+---
+
+## Project Structure
 
 ```text
 athlinks-marathon-analysis/
 │
 ├── data/
 │   └── raw/
+│       ├── 10k/
 │       ├── 21k/
 │       └── 42k/
 │
@@ -82,15 +96,67 @@ athlinks-marathon-analysis/
 
 ---
 
-## Ejemplo de uso
+## Pipeline Flow
 
-### Descargar resultados
+```text
+Athlinks Endpoint
+        ↓
+JSON Extraction
+        ↓
+Raw File Storage
+        ↓
+Data Processing
+        ↓
+Structured Dataset
+        ↓
+CSV Export
+```
+
+---
+
+## Reusing the Pipeline for Another Race
+
+The extraction script is reusable for different races hosted on Athlinks.
+
+To use another race, update the following variables inside:
+
+```text
+scripts/download_json.py
+```
+
+### Parameters
+
+```python
+EVENT_ID = 447223
+EVENT_COURSE_ID = 668417
+TOTAL_ATHLETES = 11308
+```
+
+### Description
+
+| Variable | Description |
+|---|---|
+| EVENT_ID | Main Athlinks event identifier |
+| EVENT_COURSE_ID | Specific race distance/category identifier |
+| TOTAL_ATHLETES | Total number of athletes to download |
+
+Examples of race categories:
+
+- 10K
+- 21K Half Marathon
+- 42K Marathon
+
+---
+
+## Example Usage
+
+### 1. Download raw JSON results
 
 ```bash
 python scripts/download_json.py
 ```
 
-### Procesar resultados
+### 2. Process downloaded JSON files
 
 ```bash
 python scripts/process_results.py
@@ -98,22 +164,39 @@ python scripts/process_results.py
 
 ---
 
-## Aprendizajes aplicados
+## Generated Outputs
 
-Este proyecto integra conceptos de:
+The pipeline generates:
 
-- automatización de procesos
-- ingeniería ligera de datos
-- ETL
-- consumo de APIs
-- análisis exploratorio
-- parametrización de pipelines
-- estructuración de datasets
+- raw JSON files
+- structured CSV datasets
+- normalized timing information
+- ranking datasets ready for analysis
 
 ---
 
-## Autor
+## Learning Objectives Applied
+
+This project applies concepts related to:
+
+- ETL pipelines
+- process automation
+- API consumption
+- structured data transformation
+- analytics engineering
+- reusable scripting
+- lightweight data engineering
+
+---
+
+## About This Project
+
+This repository was developed as a personal technical initiative combining endurance sports analytics and lightweight data engineering workflows.
+
+---
+
+## Author
 
 Renato Urday Calcina
 
-Ingeniero Industrial | Analista y Arquitecto de Procesos | Running & Data Analytics
+Industrial Engineer | Process Analyst | BPM & Process Architecture | Runner | Data Analytics
